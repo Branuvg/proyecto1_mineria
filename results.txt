@@ -1,0 +1,244 @@
+Decision Tree
+5 clasificaciones
+Gini depth=4: Acc=0.301, F1=0.248
+Gini depth=8: Acc=0.299, F1=0.274
+Entropy depth=6 reg.: Acc=0.311, F1=0.256
+
+               Modelo  Accuracy  Precision   Recall  F1-weighted
+        Gini depth=4  0.300567   0.256578 0.300567     0.248119
+        Gini depth=8  0.298871   0.273575 0.298871     0.274115
+Entropy depth=6 reg.  0.310504   0.270741 0.310504     0.256322
+
+Classification Report:
+              precision    recall  f1-score   support
+
+    0-2 años       0.24      0.17      0.20     31247
+    2-3 años       0.11      0.01      0.03     14218
+    3-5 años       0.19      0.12      0.15     21732
+    > 5 años       0.29      0.48      0.36     36278
+ Mujer mayor       0.37      0.41      0.39     46874
+
+    accuracy                           0.30    150349
+   macro avg       0.24      0.24      0.23    150349
+weighted avg       0.27      0.30      0.27    150349
+
+3 clasificaciones
+Gini depth=4: Acc=0.538, F1=0.377
+Entropy depth=6: Acc=0.538, F1=0.379
+Gini regularizado: Acc=0.278, F1=0.195
+
+            Modelo  Accuracy  Precision   Recall  F1-weighted
+     Gini depth=4  0.537869   0.403589 0.537869     0.376858
+  Entropy depth=6  0.538075   0.483950 0.538075     0.379201
+Gini regularizado  0.277501   0.435780 0.277501     0.195416
+
+Classification Report:
+                       precision    recall  f1-score   support
+
+Hombre 0-5 años mayor       0.54      1.00      0.70     80858
+Hombre > 5 años mayor       0.44      0.01      0.01     36278
+  Mujer mayor o igual       0.39      0.00      0.00     33213
+
+             accuracy                           0.54    150349
+            macro avg       0.46      0.33      0.24    150349
+         weighted avg       0.48      0.54      0.38    150349
+
+
+Random Forest
+5 clasificaciones
+Baseline (50 árboles): Acc=0.244, F1=0.247
+Intermedio (100, depth=8): Acc=0.298, F1=0.280
+Avanzado (150, depth=10, OOB): Acc=0.303, F1=0.283, OOB=0.2997
+
+                        Modelo  Accuracy  Precision   Recall  F1-weighted      OOB
+        Baseline (50 árboles)  0.244079   0.250623 0.244079     0.247060      NaN
+    Intermedio (100, depth=8)  0.297840   0.277704 0.297840     0.280050      NaN
+Avanzado (150, depth=10, OOB)  0.302529   0.279560 0.302529     0.282586 0.299668
+
+              precision    recall  f1-score   support
+
+    0-2 años       0.24      0.14      0.17     31247
+    2-3 años       0.10      0.07      0.08     14218
+    3-5 años       0.18      0.12      0.14     21732
+    > 5 años       0.31      0.46      0.37     36278
+ Mujer mayor       0.38      0.45      0.41     46874
+
+    accuracy                           0.30    150349
+   macro avg       0.24      0.25      0.24    150349
+weighted avg       0.28      0.30      0.28    150349
+
+3 clasificaciones
+Baseline (sin class_weight): Acc=0.442, F1=0.425
+Intermedio (depth=8): Acc=0.538, F1=0.376
+Regularizado + OOB: Acc=0.346, F1=0.335, OOB=0.3461
+
+                      Modelo  Accuracy  Precision   Recall  F1-weighted      OOB
+Baseline (sin class_weight)  0.442284   0.414805 0.442284     0.424923      NaN
+       Intermedio (depth=8)  0.537802   0.289231 0.537802     0.376162      NaN
+         Regularizado + OOB  0.345948   0.448199 0.345948     0.335408 0.346085
+
+                       precision    recall  f1-score   support
+
+Hombre 0-5 años mayor       0.55      0.64      0.59     80858
+Hombre > 5 años mayor       0.28      0.23      0.25     36278
+  Mujer mayor o igual       0.24      0.19      0.21     33213
+
+             accuracy                           0.44    150349
+            macro avg       0.36      0.35      0.35    150349
+         weighted avg       0.41      0.44      0.42    150349
+
+
+Regresion Linear
+5 clasificaciones
+C=0.1: Acc=0.295, Precision=0.281, Recall=0.295, F1=0.283
+C=1.0: Acc=0.295, Precision=0.281, Recall=0.295, F1=0.283
+C=10.0: Acc=0.295, Precision=0.281, Recall=0.295, F1=0.283
+
+    C  Accuracy  Precision   Recall  F1-weighted
+ 0.1  0.295153   0.280640 0.295153     0.282569
+ 1.0  0.295173   0.280604 0.295173     0.282544
+10.0  0.295180   0.280609 0.295180     0.282549
+
+              precision    recall  f1-score   support
+
+    0-2 años       0.24      0.14      0.18     31247
+    2-3 años       0.11      0.09      0.10     14218
+    3-5 años       0.18      0.16      0.17     21732
+    > 5 años       0.32      0.44      0.37     36278
+ Mujer mayor       0.38      0.41      0.40     46874
+
+    accuracy                           0.30    150349
+   macro avg       0.24      0.25      0.24    150349
+weighted avg       0.28      0.30      0.28    150349
+
+3 clasificaciones
+L2 C=1.0 (multinomial): Acc=0.538, F1=0.386
+L2 C=0.1 (más regularización): Acc=0.538, F1=0.386
+L1 C=1.0 (selección vars): Acc=0.538, F1=0.386
+
+                        Modelo  Accuracy  Precision   Recall  F1-weighted
+       L2 C=1.0 (multinomial)  0.537736   0.458357 0.537736     0.385831
+L2 C=0.1 (más regularización)  0.537736   0.458357 0.537736     0.385831
+    L1 C=1.0 (selección vars)  0.537742   0.458835 0.537742     0.385857
+
+                       precision    recall  f1-score   support
+
+Hombre 0-5 años mayor       0.54      0.99      0.70     80858
+Hombre > 5 años mayor       0.43      0.02      0.04     36278
+  Mujer mayor o igual       0.29      0.00      0.01     33213
+
+             accuracy                           0.54    150349
+            macro avg       0.42      0.34      0.25    150349
+         weighted avg       0.46      0.54      0.39    150349      
+
+
+XGBoost
+5 clasificaciones
+Baseline (sin ponderación)
+  → Acc=0.342, Prec=0.312, Rec=0.342, F1=0.237
+
+Intermedio + sample_weight
+  → Acc=0.300, Prec=0.287, Rec=0.300, F1=0.291
+
+Avanzado + regularización + sample_weight
+  → Acc=0.298, Prec=0.287, Rec=0.298, F1=0.291
+
+                                   Modelo  Accuracy  Precision   Recall  F1-weighted
+               Baseline (sin ponderación)  0.342337   0.311501 0.342337     0.236554
+               Intermedio + sample_weight  0.299736   0.286696 0.299736     0.291427
+Avanzado + regularización + sample_weight  0.297973   0.286907 0.297973     0.291260
+
+Classification Report:
+              precision    recall  f1-score   support
+
+    0-2 años       0.24      0.21      0.23     31247
+    2-3 años       0.11      0.07      0.09     14218
+    3-5 años       0.19      0.16      0.17     21732
+    > 5 años       0.33      0.41      0.36     36278
+ Mujer mayor       0.39      0.41      0.40     46874
+
+    accuracy                           0.30    150349
+   macro avg       0.25      0.25      0.25    150349
+weighted avg       0.29      0.30      0.29    150349
+
+3 clasificaciones
+Baseline
+  → Acc=0.539, Prec=0.469, Rec=0.539, F1=0.383
+
+Intermedio (depth=6, subsample)
+  → Acc=0.539, Prec=0.484, Rec=0.539, F1=0.390
+
+Regularizado + sample_weight
+  → Acc=0.379, Prec=0.459, Rec=0.379, F1=0.384
+
+                         Modelo  Accuracy  Precision   Recall  F1-weighted
+                       Baseline  0.538660   0.469132 0.538660     0.383269
+Intermedio (depth=6, subsample)  0.539192   0.483741 0.539192     0.389917
+   Regularizado + sample_weight  0.379357   0.458753 0.379357     0.383997
+
+Classification Report:
+                       precision    recall  f1-score   support
+
+Hombre 0-5 años mayor       0.54      0.99      0.70     80858
+Hombre > 5 años mayor       0.46      0.03      0.06     36278
+  Mujer mayor o igual       0.37      0.00      0.00     33213
+
+             accuracy                           0.54    150349
+            macro avg       0.46      0.34      0.25    150349
+         weighted avg       0.48      0.54      0.39    150349
+
+
+Redes Neuronales
+5 clasificaciones
+Baseline — 1 capa (64), sin ponderación
+  → Acc=0.344, Prec=0.267, Rec=0.344, F1=0.248, Epochs=69
+
+Intermedio — 2 capas (128,64) + sample_weight
+  → Acc=0.255, Prec=0.283, Rec=0.255, F1=0.262, Epochs=223
+
+Profundo — 3 capas (256,128,64) + early stop + sample_weight
+  → Acc=0.298, Prec=0.285, Rec=0.298, F1=0.289, Epochs=20
+
+                                                      Modelo  Accuracy  Precision   Recall  F1-weighted  Epochs
+                     Baseline — 1 capa (64), sin ponderación  0.344026   0.267264 0.344026     0.248099      69
+               Intermedio — 2 capas (128,64) + sample_weight  0.255426   0.282822 0.255426     0.261576     223
+Profundo — 3 capas (256,128,64) + early stop + sample_weight  0.298313   0.284929 0.298313     0.288911      20
+
+Classification Report:
+              precision    recall  f1-score   support
+
+    0-2 años       0.24      0.18      0.21     31247
+    2-3 años       0.10      0.05      0.07     14218
+    3-5 años       0.18      0.21      0.20     21732
+    > 5 años       0.33      0.38      0.36     36278
+ Mujer mayor       0.38      0.43      0.40     46874
+
+    accuracy                           0.30    150349
+   macro avg       0.25      0.25      0.25    150349
+weighted avg       0.28      0.30      0.29    150349
+
+3 clasificaciones
+Baseline — 1 capa (64), relu
+  → Acc=0.539, Prec=0.488, Rec=0.539, F1=0.396, Epochs=62
+
+Intermedio — 2 capas (128,64), tanh
+  → Acc=0.531, Prec=0.456, Rec=0.531, F1=0.420, Epochs=112
+
+Profundo — 3 capas (256,128,64) + early stop + sample_weight
+  → Acc=0.375, Prec=0.459, Rec=0.375, F1=0.378, Epochs=25
+
+                                                      Modelo  Accuracy  Precision   Recall  F1-weighted  Epochs
+                                Baseline — 1 capa (64), relu  0.539232   0.488056 0.539232     0.395818      62
+                         Intermedio — 2 capas (128,64), tanh  0.531171   0.455637 0.531171     0.419782     112
+Profundo — 3 capas (256,128,64) + early stop + sample_weight  0.374675   0.458957 0.374675     0.378365      25
+
+Classification Report:
+                       precision    recall  f1-score   support
+
+Hombre 0-5 años mayor       0.55      0.93      0.69     80858
+Hombre > 5 años mayor       0.39      0.09      0.15     36278
+  Mujer mayor o igual       0.31      0.03      0.06     33213
+
+             accuracy                           0.53    150349
+            macro avg       0.41      0.35      0.30    150349
+         weighted avg       0.46      0.53      0.42    150349
