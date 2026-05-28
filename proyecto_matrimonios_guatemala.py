@@ -157,7 +157,6 @@ for ax, col, color, titulo in [
     ax.set_xlabel('Edad (años)')
     ax.legend()
 plt.tight_layout()
-plt.savefig('plot_edades_hist.png', bbox_inches='tight')
 plt.show()
 
 # --- 3.2 Evolución temporal de matrimonios por año ---
@@ -180,7 +179,6 @@ plt.ylabel('Número de Matrimonios')
 plt.xticks(list(conteo_años.index))
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('plot_evolucion_anual.png', bbox_inches='tight')
 plt.show()
 
 # --- 3.3 Mapa de calor: matrimonios por año y mes ---
@@ -193,7 +191,6 @@ plt.title('Mapa de Calor: Matrimonios por Año y Mes de Ocurrencia')
 plt.xlabel('Mes')
 plt.ylabel('Año')
 plt.tight_layout()
-plt.savefig('plot_heatmap_anio_mes.png', bbox_inches='tight')
 plt.show()
 
 # --- 3.4 Correlación entre variables numéricas ---
@@ -202,7 +199,6 @@ sns.heatmap(df_num.corr(), annot=True, fmt='.2f', cmap='coolwarm',
             center=0, square=True, linewidths=0.5)
 plt.title('Mapa de Correlación – Variables Numéricas')
 plt.tight_layout()
-plt.savefig('plot_correlacion.png', bbox_inches='tight')
 plt.show()
 
 
@@ -266,7 +262,6 @@ ax2.set_xlabel('Percentil')
 ax2.set_ylabel('Diferencia de Edad [años]')
 
 plt.tight_layout()
-plt.savefig('plot_diff_edad_dist.png', bbox_inches='tight')
 plt.show()
 
 
@@ -304,7 +299,6 @@ axes[1].tick_params(axis='x', rotation=30)
 
 plt.suptitle('Categorización de la Variable Respuesta DIFF_EDAD', y=1.02)
 plt.tight_layout()
-plt.savefig('plot_categorias_respuesta.png', bbox_inches='tight')
 plt.show()
 
 
@@ -352,7 +346,6 @@ for ax, col, titulo in zip(axes,
     ax.tick_params(axis='x', rotation=15)
     ax.legend(fontsize=8)
 plt.tight_layout()
-plt.savefig('plot_diff_por_educacion.png', bbox_inches='tight')
 plt.show()
 
 # ---- 6.2 T-test: Nacionalidad (hombre extranjero vs. guatemalteco) ----
@@ -425,7 +418,6 @@ plt.title('Diferencia de Edad Promedio por Departamento')
 plt.xlabel('Diferencia de Edad promedio [años]')
 plt.legend()
 plt.tight_layout()
-plt.savefig('plot_diff_por_departamento.png', bbox_inches='tight')
 plt.show()
 
 # ---- 6.4 Correlación de Pearson: año de registro ----
@@ -468,7 +460,6 @@ axes[1].set_ylabel('Diferencia de Edad [años]')
 axes[1].xaxis.set_major_locator(mticker.MaxNLocator(integer=True))
 
 plt.tight_layout()
-plt.savefig('plot_tendencia_temporal.png', bbox_inches='tight')
 plt.show()
 
 print("\nEstadísticos por año:")
@@ -528,7 +519,6 @@ axes[1].set_xlabel('Educación de la Mujer')
 axes[1].set_ylabel('Educación del Hombre')
 
 plt.tight_layout()
-plt.savefig('plot_heatmap_educacion.png', bbox_inches='tight')
 plt.show()
 
 idx_max = pivot_mean.stack().idxmax()
@@ -555,7 +545,8 @@ cat_cols = [c for c in cat_cols if c in df_model.columns]
 df_encoded = pd.get_dummies(df_model, columns=cat_cols, drop_first=True)
 
 # Imputar con 0 los nulos residuales en variables dummy (válido para binarias)
-df_encoded = df_encoded.fillna(0)
+num_bool_cols = df_encoded.select_dtypes(include=[np.number, bool]).columns
+df_encoded[num_bool_cols] = df_encoded[num_bool_cols].fillna(0)
 
 print(f"Shape antes de OHE : {df_model.shape}")
 print(f"Shape después de OHE: {df_encoded.shape}")
@@ -631,7 +622,6 @@ imp_dt_reg.sort_values().plot(kind='barh', color='steelblue', edgecolor='white')
 plt.title('Top 10 Variables – Árbol de Decisión (Regresión)')
 plt.xlabel('Importancia')
 plt.tight_layout()
-plt.savefig('plot_dt_importancia_reg.png', bbox_inches='tight')
 plt.show()
 
 # ---- 8.2 Clasificación 5 clases (CAT_DIFF) ----
@@ -679,7 +669,6 @@ plt.title('Matriz de Confusión – Árbol de Decisión 5 Clases')
 plt.ylabel('Real'); plt.xlabel('Predicho')
 plt.xticks(rotation=30, ha='right')
 plt.tight_layout()
-plt.savefig('plot_dt_confusion_5clases.png', bbox_inches='tight')
 plt.show()
 print(classification_report(y5_test, y_pred5_dt, zero_division=0))
 
@@ -726,7 +715,6 @@ plt.title('Matriz de Confusión – Árbol de Decisión 3 Clases')
 plt.ylabel('Real'); plt.xlabel('Predicho')
 plt.xticks(rotation=20, ha='right')
 plt.tight_layout()
-plt.savefig('plot_dt_confusion_3clases.png', bbox_inches='tight')
 plt.show()
 print(classification_report(y3_test, y_pred3_dt, zero_division=0))
 
@@ -824,7 +812,6 @@ plt.title('Matriz de Confusión – Random Forest 5 Clases')
 plt.ylabel('Real'); plt.xlabel('Predicho')
 plt.xticks(rotation=30, ha='right')
 plt.tight_layout()
-plt.savefig('plot_rf_confusion_5clases.png', bbox_inches='tight')
 plt.show()
 print(classification_report(y5_test, y_pred5_rf, zero_division=0))
 
@@ -872,7 +859,6 @@ plt.title('Matriz de Confusión – Random Forest 3 Clases')
 plt.ylabel('Real'); plt.xlabel('Predicho')
 plt.xticks(rotation=20, ha='right')
 plt.tight_layout()
-plt.savefig('plot_rf_confusion_3clases.png', bbox_inches='tight')
 plt.show()
 print(classification_report(y3_test, y_pred3_rf, zero_division=0))
 
@@ -885,7 +871,6 @@ for ax, model, title in [(axes[0], best_rf_5, '5 Clases'),
     ax.set_title(f'Top 15 Variables – RF {title}')
     ax.set_xlabel('Importancia')
 plt.tight_layout()
-plt.savefig('plot_rf_importancia.png', bbox_inches='tight')
 plt.show()
 
 print("\nComparación global – Random Forest:")
@@ -953,7 +938,6 @@ coefs_best.nsmallest(10).sort_values(ascending=False).plot(
     kind='barh', ax=axes[1], color='tomato', edgecolor='white')
 axes[1].set_title(f'Top 10 Coef. Negativos – {best_rl_name}')
 plt.tight_layout()
-plt.savefig('plot_rl_coeficientes.png', bbox_inches='tight')
 plt.show()
 
 # ---- 10.2 Regresión logística 5 clases ----
@@ -996,7 +980,6 @@ plt.title(f'Matriz de Confusión – Reg. Logística 5 Clases (C={best_C5})')
 plt.ylabel('Real'); plt.xlabel('Predicho')
 plt.xticks(rotation=30, ha='right')
 plt.tight_layout()
-plt.savefig('plot_log_confusion_5clases.png', bbox_inches='tight')
 plt.show()
 print(classification_report(y5_test, y_pred5_log, zero_division=0))
 
@@ -1045,7 +1028,6 @@ plt.title(f'Matriz de Confusión – Reg. Logística 3 Clases ({best_label3_log}
 plt.ylabel('Real'); plt.xlabel('Predicho')
 plt.xticks(rotation=20, ha='right')
 plt.tight_layout()
-plt.savefig('plot_log_confusion_3clases.png', bbox_inches='tight')
 plt.show()
 print(classification_report(y3_test, y_pred3_log, zero_division=0))
 
@@ -1115,7 +1097,6 @@ if evals:
     plt.title('Curva de Aprendizaje – XGBoost Regresión')
     plt.legend()
     plt.tight_layout()
-    plt.savefig('plot_xgb_curva_reg.png', bbox_inches='tight')
     plt.show()
 
 # ---- 11.2 Clasificación 5 clases ----
@@ -1178,7 +1159,6 @@ plt.title('Matriz de Confusión – XGBoost 5 Clases')
 plt.ylabel('Real'); plt.xlabel('Predicho')
 plt.xticks(rotation=30, ha='right')
 plt.tight_layout()
-plt.savefig('plot_xgb_confusion_5clases.png', bbox_inches='tight')
 plt.show()
 print(classification_report(y_test5_xgb_l, y_pred5_xgb_l, zero_division=0))
 
@@ -1240,7 +1220,6 @@ plt.title('Matriz de Confusión – XGBoost 3 Clases')
 plt.ylabel('Real'); plt.xlabel('Predicho')
 plt.xticks(rotation=20, ha='right')
 plt.tight_layout()
-plt.savefig('plot_xgb_confusion_3clases.png', bbox_inches='tight')
 plt.show()
 print(classification_report(y_test3_xgb_l, y_pred3_xgb_l, zero_division=0))
 
@@ -1256,7 +1235,6 @@ for ax, model, title, color in [
     ax.set_title(f'Top 15 Variables – XGB {title}')
     ax.set_xlabel('Importancia (gain normalizado)')
 plt.tight_layout()
-plt.savefig('plot_xgb_importancia_global.png', bbox_inches='tight')
 plt.show()
 
 # Top 5 por modelo para comparación cruzada
@@ -1336,7 +1314,6 @@ for ax, metrica in zip(axes, metricas):
 
 plt.suptitle('Comparación Global de Algoritmos', fontsize=13, fontweight='bold', y=1.02)
 plt.tight_layout()
-plt.savefig('plot_comparacion_global.png', bbox_inches='tight')
 plt.show()
 
 print("\n" + "=" * 70)
